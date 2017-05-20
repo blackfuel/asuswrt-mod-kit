@@ -14,7 +14,6 @@ This tool will automatically detect the router model and version of your firmwar
 
 Binwalk is used to extract the AsusWrt filesystem and Linux kernel from the (.trx) image.
 
-Any piece of the AsusWrt filesystem may be changed. The Linux kernel cannot be changed.  When you're finished with the filesystem, my script initiates the firmware rebuild by utilizing the original Asus firmware packaging system.
+Any piece of the AsusWrt filesystem may be changed. The Linux kernel cannot be changed.  When you're finished with the filesystem, my script initiates the firmware rebuild by utilizing the original Asus firmware packaging tools.
 
 DISCLAIMER: There is risk of damage to your router when you play with custom firmwares.  I use this tool on my RT-AC68U router without any issues.  However, no testing has been done for the other Asus ARM routers. Before using this tool, you should be familiar with the recovery methods available for unbricking a router.  
-
