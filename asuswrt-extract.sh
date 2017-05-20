@@ -153,9 +153,9 @@ cat <<-EOF >"$REBUILD_FIRMWARE"
 	  echo
 	  echo "# ORIGINAL FIRMWARE ##################################################"
 	  binwalk "\${FIRMWARE}"
-	  echo
 	  echo "# MODIFIED FIRMWARE ##################################################"
 	  binwalk "\${FW_NAME}"
+	  echo BUILD_NAME="\$BUILD_NAME" KERNEL_VER="\$KERNEL_VER" FS_VER="\$FS_VER" SERIALNO="\$SERIALNO" EXTENDNO="\$EXTENDNO"
 	fi
 	EOF
 
