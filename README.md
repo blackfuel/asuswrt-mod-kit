@@ -13,12 +13,12 @@ DISCLAIMER: There is risk of damage to your router when you play with custom fir
 
 ### Getting started with AsusWrt Mod Kit
 ```
-# Tested with Ubuntu 16.04.2 LTS
+# Tested on Ubuntu 16.04.2 LTS (64-bit)
 
 # install dependencies
 sudo apt install git binwalk
 
-# for 64-bit systems, the Asus tools require 32-bit libraries
+# on 64-bit systems, the Asus tools require 32-bit libraries
 sudo apt install lib32z1-dev lib32stdc++6
 
 # install asuswrt-mod-kit
