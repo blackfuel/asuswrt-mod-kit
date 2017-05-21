@@ -95,15 +95,17 @@ ROOTDIR="${PATH_CMD%/*}"
 SDKDIR="$ROOTDIR/$ASUSWRT/release/$SDK"
 IMAGEDIR="$ROOTDIR/$ASUSWRT/release/src/router/arm-uclibc"
 TARGETDIR="$IMAGEDIR/target"
+
 mkdir -p "$ROOTDIR"
 cd "$ROOTDIR"
 
 [ ! -f "$FILENAME_ZIP" ] && wget $ASUS_SOURCE_URL
 [ ! -f "$FILENAME_TGZ" ] && unzip $FILENAME_ZIP
 
-rm -rf "$ROOTDIR/$ASUSWRT"
+rm -rf "$ASUSWRT"
 
-if [ ! -d "$ROOTDIR/$ASUSWRT" ]; then
+if [ ! -d "$ASUSWRT" ]; then
+  rm -rf asuswrt
   tar xzvf "$FILENAME_TGZ"
   mv asuswrt "$ASUSWRT"
   #find "$SDKDIR/linux/linux-2.6/*" -type d -exec rm -rf '{}' \; || echo "Purging some source files."
