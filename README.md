@@ -14,25 +14,45 @@ DISCLAIMER: There is risk of damage to your router when you play with custom fir
 ### Getting started with AsusWrt Mod Kit
 ```
 # Tested with Ubuntu 16.04.2 LTS
+
+# install dependencies
 sudo apt install git binwalk
+
+# for 64-bit systems, the Asus tools require 32-bit libraries
+sudo apt install lib32z1-dev lib32stdc++6
+
+# install asuswrt-mod-kit
 cd
 git clone https://github.com/blackfuel/asuswrt-mod-kit.git
 cd asuswrt-mod-kit
-./asuswrt-extract.sh <trx-image>
 ```
 
 
-### How to see the firmware version info
+### Example: How to see the firmware version info
 ```
 # grab some firmwares from the Asus website and display the version info
 wget -nc http://dlcdnet.asus.com/pub/ASUS/wireless/RT-AC68U/FW_RT_AC68U_30043807378.zip
-unzip FW_RT_AC68U_30043807378.zip
+[ ! -f RT-AC68U_3.0.0.4_380_7378-g7a25649.trx ] && unzip FW_RT_AC68U_30043807378.zip
 ./asuswrt-version.sh RT-AC68U_3.0.0.4_380_7378-g7a25649.trx
 tail --bytes=256 RT-AC68U_3.0.0.4_380_7378-g7a25649.trx | hexdump -C
 
 # an old firmware
 wget -nc http://dlcdnet.asus.com/pub/ASUS/wireless/RT-AC68U/FW_RT_AC68U_3004374291.zip
-unzip FW_RT_AC68U_3004374291.zip
+[ ! -f FW_RT_AC68U_3004374291.trx ] && unzip FW_RT_AC68U_3004374291.zip
 ./asuswrt-version.sh FW_RT_AC68U_3004374291.trx
 tail --bytes=256 FW_RT_AC68U_3004374291.trx | hexdump -C
+```
+
+
+### Example: Firmware extraction and rebuild
+```
+# grab a firmware from the Asus website
+wget -nc http://dlcdnet.asus.com/pub/ASUS/wireless/RT-AC68U/FW_RT_AC68U_30043807378.zip
+[ ! -f RT-AC68U_3.0.0.4_380_7378-g7a25649.trx ] && unzip FW_RT_AC68U_30043807378.zip
+
+# extract
+./asuswrt-extract.sh RT-AC68U_3.0.0.4_380_7378-g7a25649.trx
+
+# rebuild
+asuswrt-rt-ac68u/release/src/router/arm-uclibc/asuswrt-rebuild.sh
 ```
