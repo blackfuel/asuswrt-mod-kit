@@ -34,13 +34,11 @@ cd asuswrt-mod-kit
 wget -nc http://dlcdnet.asus.com/pub/ASUS/wireless/RT-AC68U/FW_RT_AC68U_30043807378.zip
 [ ! -f RT-AC68U_3.0.0.4_380_7378-g7a25649.trx ] && unzip FW_RT_AC68U_30043807378.zip
 ./asuswrt-version.sh RT-AC68U_3.0.0.4_380_7378-g7a25649.trx
-tail --bytes=256 RT-AC68U_3.0.0.4_380_7378-g7a25649.trx | hexdump -C
 
 # an old firmware
 wget -nc http://dlcdnet.asus.com/pub/ASUS/wireless/RT-AC68U/FW_RT_AC68U_3004374291.zip
 [ ! -f FW_RT_AC68U_3004374291.trx ] && unzip FW_RT_AC68U_3004374291.zip
 ./asuswrt-version.sh FW_RT_AC68U_3004374291.trx
-tail --bytes=256 FW_RT_AC68U_3004374291.trx | hexdump -C
 ```
 
 
