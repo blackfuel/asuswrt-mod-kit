@@ -99,8 +99,10 @@ TARGETDIR="$IMAGEDIR/target"
 mkdir -p "$ROOTDIR"
 cd "$ROOTDIR"
 
-[ ! -f "$FILENAME_ZIP" ] && wget $ASUS_SOURCE_URL
-[ ! -f "$FILENAME_TGZ" ] && unzip $FILENAME_ZIP
+if [ ! -f "$FILENAME_TGZ" ]; then
+  [ ! -f "$FILENAME_ZIP" ] && wget $ASUS_SOURCE_URL
+  unzip $FILENAME_ZIP
+fi
 
 rm -rf "$ASUSWRT"
 
