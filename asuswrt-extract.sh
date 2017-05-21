@@ -1,6 +1,6 @@
 #!/bin/bash
 PATH_CMD="$(readlink -f $0)"
-FIRMWARE="$1"
+FIRMWARE="$(readlink -f $1)"
 
 if [ ! -f "$FIRMWARE" ]; then
   echo "AsusWrt Mod Kit - A tool for rebuilding the firmware image of Asus ARM routers."
@@ -171,8 +171,9 @@ cat <<-EOF >"$REBUILD_FIRMWARE"
 	  echo "# ORIGINAL FIRMWARE ##################################################"
 	  binwalk "\${FIRMWARE}"
 	  echo "# MODIFIED FIRMWARE ##################################################"
-	  binwalk "\${FW_NAME}"
+	  binwalk "./\${FW_NAME}"
 	  echo BUILD_NAME="\$BUILD_NAME" KERNEL_VER="\$KERNEL_VER" FS_VER="\$FS_VER" SERIALNO="\$SERIALNO" EXTENDNO="\$EXTENDNO"
+	  echo "New firmware image was copied to: \$ROOTDIR/image"
 	fi
 	EOF
 
