@@ -20,6 +20,8 @@ FS_VER=$(printf "%d.%d" 0x$(xxd -s -62 -l 1 -ps $FIRMWARE) 0x$(xxd -s -61 -l 1 -
 SERIALNO=$(printf "%d" 0x$(xxd -s -31 -l 1 -ps $FIRMWARE)$(xxd -s -32 -l 1 -ps $FIRMWARE))
 EXTENDNO=$(printf "%d" 0x$(xxd -s -29 -l 1 -ps $FIRMWARE)$(xxd -s -30 -l 1 -ps $FIRMWARE))
 
+tail --bytes=256 $FIRMWARE | hexdump -C
+echo
 echo FIRMWARE="${FIRMWARE##*/}"
 echo BUILD_NAME="$BUILD_NAME" 
 echo KERNEL_VER="$KERNEL_VER" 
