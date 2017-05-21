@@ -110,7 +110,21 @@ if [ ! -d "$ROOTDIR/$ASUSWRT" ]; then
   #find $ASUSWRT/release/src/router/* -type d -exec rm -rf '{}' \; || echo "Purging some source files."
 fi
 
+set +x
+echo
+echo "#######################################################################################"
+echo FIRMWARE="${FIRMWARE##*/}"
+echo BUILD_NAME="$BUILD_NAME" 
+echo KERNEL_VER="$KERNEL_VER" 
+echo FS_VER="$FS_VER" 
+echo SERIALNO="$SERIALNO" 
+echo EXTENDNO="$EXTENDNO"
+echo "#######################################################################################"
+sleep 2
+set -x
+
 if [ ! -d "$TARGETDIR" ]; then
+  rm -rf _*
   binwalk -e "$FIRMWARE"
   mkdir -p "$IMAGEDIR"
   mv -f _*/squashfs-root "$TARGETDIR"
@@ -148,7 +162,6 @@ cat <<-EOF >"$REBUILD_FIRMWARE"
 	  rm -rf "\$FW_NAME"
 	  #ln -sf "\${SDKDIR}/image/\${BUILD_NAME}.trx" "\${FW_NAME}"
 	  cp -p "\${SDKDIR}/image/\${BUILD_NAME}.trx" "\${FW_NAME}"
-	  set +e
 	  set +x
 	  echo
 	  echo "# ORIGINAL FIRMWARE ##################################################"
@@ -162,26 +175,16 @@ cat <<-EOF >"$REBUILD_FIRMWARE"
 chmod a+x "$REBUILD_FIRMWARE"
 
 cd "$SDKDIR"
-
-MAKE_CMD="/usr/bin/make $ROUTER_MODEL"
-while [ true ]; do
-  MAKE_PID=$(/bin/echo $(/bin/ps w | /bin/grep -i "$MAKE_CMD" | /bin/grep -v grep) | /usr/bin/cut -f1 -d' ')
-  if [ -z "$MAKE_PID" ]; then
-    $MAKE_CMD &
-    /bin/sleep 7
-  else
-    /bin/kill $MAKE_PID
-    /bin/sleep 1
-    break
-  fi
-done
+rm -rf .config
+make $ROUTER_MODEL &
+sleep 7
+killall make
+sleep 1
 
 rm -rf image
 mkdir -p image
 
-set +e
 set +x
-
 echo "#######################################################################################"
 echo
 echo "Please ignore any previous error if it says 'Terminated'.  We needed to"
