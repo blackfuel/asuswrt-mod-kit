@@ -8,7 +8,7 @@ Binwalk is used to extract the AsusWrt filesystem and Linux kernel from the (.tr
 
 Any piece of the AsusWrt filesystem may be changed. The Linux kernel cannot be changed.  When you're finished with the filesystem, my script initiates the firmware rebuild by utilizing the original Asus firmware packaging tools.
 
-DISCLAIMER: There is risk of damage to your router when you play with custom firmwares.  I use this tool on my RT-AC68U router without any issues.  However, no testing has been done for the other Asus ARM routers. Before using this tool, you should be familiar with the recovery methods available for unbricking a router.  
+DISCLAIMER: There is risk of damage to your router when you play with custom firmwares.  I use this tool for my RT-AC68U router without any issues.  However, no testing has been done for the other Asus ARM routers. Before using this tool, you should be familiar with the recovery methods available for unbricking a router.  
 
 
 ### Getting started with AsusWrt Mod Kit
