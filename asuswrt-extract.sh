@@ -165,6 +165,7 @@ cat <<-EOF >"$REBUILD_FIRMWARE"
 	cd "\$SDKDIR"
 	[ ! -f ctools/objcopy.original ] && mv -f ctools/objcopy ctools/objcopy.original
 	echo '#!/bin/bash' >ctools/objcopy
+	echo '#asuswrt-mod-kit: your file was renamed to objcopy.original' >>ctools/objcopy
 	chmod a+x ctools/objcopy
 	make image BUILD_NAME="\$BUILD_NAME" KERNEL_VER="\$KERNEL_VER" FS_VER="\$FS_VER" SERIALNO="\$SERIALNO" EXTENDNO="\$EXTENDNO"
 	rm -f image/vmlinux image/vmlinux.o
