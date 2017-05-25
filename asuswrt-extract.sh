@@ -100,8 +100,17 @@ mkdir -p "$ROOTDIR"
 cd "$ROOTDIR"
 
 if [ ! -f "$FILENAME_TGZ" ]; then
-  [ ! -f "$FILENAME_ZIP" ] && wget $ASUS_SOURCE_URL
+  if [ ! -f "$FILENAME_ZIP" ]; then
+
+    if [ -n "$LOCAL_ASUS_SOURCES" ] && [ -f "$LOCAL_ASUS_SOURCES/$FILENAME_ZIP" ]; then
+      cp -v "$LOCAL_ASUS_SOURCES/$FILENAME_ZIP" .
+    fi
+
+    [ ! -f "$FILENAME_ZIP" ] && wget $ASUS_SOURCE_URL
+
+  fi
   unzip $FILENAME_ZIP
+  [ -f "$FILENAME_TGZ" ] && rm -f $FILENAME_ZIP
 fi
 
 rm -rf "$ASUSWRT"
