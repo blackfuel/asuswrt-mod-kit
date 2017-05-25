@@ -21,6 +21,12 @@ sudo apt install git binwalk
 # on 64-bit systems, the Asus tools require 32-bit libraries
 sudo apt install lib32z1-dev lib32stdc++6
 
+# install binwalk
+cd
+git clone https://github.com/devttys0/binwalk.git
+cd binwalk
+sudo ./deps.sh
+
 # install asuswrt-mod-kit
 cd
 git clone https://github.com/blackfuel/asuswrt-mod-kit.git

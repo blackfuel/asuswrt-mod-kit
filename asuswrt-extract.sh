@@ -1,6 +1,7 @@
 #!/bin/bash
 PATH_CMD="$(readlink -f $0)"
 FIRMWARE="$(readlink -f $1)"
+BINWALK="$(which binwalk)"
 
 if [ ! -f "$FIRMWARE" ]; then
   echo "AsusWrt Mod Kit - A tool for rebuilding the firmware image of Asus ARM routers."
@@ -13,7 +14,7 @@ fi
 set -e
 set -x
 
-if [ -z "$(which binwalk)" ]; then
+if [ -z "$BINWALK" ]; then
   echo "Please install binwalk."
   exit 1
 fi
@@ -138,7 +139,7 @@ set -x
 
 if [ ! -d "$TARGETDIR" ]; then
   rm -rf _*
-  binwalk -e "$FIRMWARE"
+  $BINWALK -e "$FIRMWARE"
   mkdir -p "$IMAGEDIR"
   mv -f _*/squashfs-root "$TARGETDIR"
   mv -f _*/1C "$IMAGEDIR/piggy"
@@ -179,9 +180,9 @@ cat <<-EOF >"$REBUILD_FIRMWARE"
 	  set +x
 	  echo
 	  echo "# ORIGINAL FIRMWARE ##################################################"
-	  binwalk "\${FIRMWARE}"
+	  $BINWALK "\${FIRMWARE}"
 	  echo "# MODIFIED FIRMWARE ##################################################"
-	  binwalk "./\${FW_NAME}"
+	  $BINWALK "./\${FW_NAME}"
 	  echo BUILD_NAME="\$BUILD_NAME" KERNEL_VER="\$KERNEL_VER" FS_VER="\$FS_VER" SERIALNO="\$SERIALNO" EXTENDNO="\$EXTENDNO"
 	  echo "New firmware image was copied to: \$ROOTDIR/image"
 	fi
