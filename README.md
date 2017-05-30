@@ -21,7 +21,8 @@ sudo apt install git
 # on 64-bit systems, the Asus tools require 32-bit libraries
 sudo apt install lib32z1-dev lib32stdc++6
 
-# install binwalk
+# install latest binwalk
+sudo apt remove binwalk
 cd
 git clone https://github.com/devttys0/binwalk.git
 cd binwalk
