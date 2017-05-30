@@ -16,7 +16,7 @@ DISCLAIMER: There is risk of damage to your router when you play with custom fir
 # Tested on Ubuntu 16.04.2 LTS (64-bit)
 
 # install dependencies
-sudo apt install git binwalk
+sudo apt install git
 
 # on 64-bit systems, the Asus tools require 32-bit libraries
 sudo apt install lib32z1-dev lib32stdc++6
