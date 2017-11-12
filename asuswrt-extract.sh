@@ -86,6 +86,13 @@ case $ROUTER_MODEL in
     ASUSWRT="asuswrt-rt-ac3200"
     SDK="src-rt-7.x.main/src"
     ;;
+  "rt-ac1200g+" )
+    FILENAME_ZIP="GPL_RT_AC1200GPlus_30043804089.zip"
+    FILENAME_TGZ="GPL_RT-AC1200G+_3.0.0.4.380.4089-g333ec6e.tgz"
+    ASUS_SOURCE_URL="http://dlcdnet.asus.com/pub/ASUS/wireless/RT-AC1200G+/$FILENAME_ZIP"
+    ASUSWRT="asuswrt-rt-ac1200+"
+    SDK="src-rt-9.x/src"
+    ;;
   * )
     echo "Firmware image not supported."
     exit 1
@@ -96,6 +103,11 @@ ROOTDIR="${PATH_CMD%/*}"
 SDKDIR="$ROOTDIR/$ASUSWRT/release/$SDK"
 IMAGEDIR="$ROOTDIR/$ASUSWRT/release/src/router/arm-uclibc"
 TARGETDIR="$IMAGEDIR/target"
+
+if [ $ROUTER_MODEL = "rt-ac1200g+" ]
+then
+export PATH=$PATH:$SDKDIR/toolchains/hndtools-arm-linux-2.6.36-uclibc-4.5.3/bin
+fi
 
 mkdir -p "$ROOTDIR"
 cd "$ROOTDIR"
@@ -192,7 +204,14 @@ chmod a+x "$REBUILD_FIRMWARE"
 
 cd "$SDKDIR"
 rm -rf .config
-make $ROUTER_MODEL &
+
+if [ $ROUTER_MODEL = "rt-ac1200g+" ]
+then
+	make $BUILD_NAME &
+else
+	make $ROUTER_MODEL &
+fi
+
 sleep 7
 killall make
 sleep 1
