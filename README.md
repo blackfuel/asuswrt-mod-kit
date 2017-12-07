@@ -29,7 +29,7 @@ cd binwalk
 sudo ./deps.sh
 sudo python setup.py install
 
-# OR, update to latest binwalk if you cloned it already
+# OR, update to latest binwalk if you're already using it
 cd
 cd binwalk
 git pull
