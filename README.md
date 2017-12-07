@@ -26,7 +26,9 @@ sudo apt remove binwalk
 cd
 git clone https://github.com/devttys0/binwalk.git
 cd binwalk
+sudo python setup.py uninstall
 sudo ./deps.sh
+sudo python setup.py install
 
 # install asuswrt-mod-kit
 cd
