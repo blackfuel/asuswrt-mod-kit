@@ -26,6 +26,13 @@ sudo apt remove binwalk
 cd
 git clone https://github.com/devttys0/binwalk.git
 cd binwalk
+sudo ./deps.sh
+sudo python setup.py install
+
+# OR, update to latest binwalk
+cd
+cd binwalk
+git pull
 sudo python setup.py uninstall
 sudo ./deps.sh
 sudo python setup.py install
